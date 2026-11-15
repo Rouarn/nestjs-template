@@ -51,8 +51,8 @@ for (const file of [`.env.${nodeEnv}`, '.env']) {
   }
 }
 
-const dbName = process.env.NEST_DATABASE_NAME ?? 'nestjs_app';
-// 与 validation.schema 的默认值保持一致，避免建表与实际查询的表名对不上
+// 兜底值与 src/config/validation.schema.ts 保持一致，避免建的库/表与运行期实际访问的对不上
+const dbName = process.env.NEST_DATABASE_NAME ?? 'nestjs_template';
 const prefix = process.env.NEST_DATABASE_TABLE_PREFIX ?? 'ra_';
 
 // 建表 SQL（与 Auth / User 实体一致）

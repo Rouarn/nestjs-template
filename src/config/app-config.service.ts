@@ -44,9 +44,19 @@ export class AppConfigService {
 
   // ============================== 应用基础 ==============================
 
+  /**
+   * 拼接「标题 + 环境后缀」
+   *
+   * 启动日志与 Swagger 都需要带环境后缀的标题，统一在这里拼一次，
+   * 避免两处各自实现后出现一处有后缀、一处没有的偏差。
+   */
+  private withEnvironmentSuffix(title: string): string {
+    return `${title}${ENVIRONMENT_SUFFIX[this.raw.environment]}`;
+  }
+
+  /** 应用标题（启动日志使用） */
   get appTitle(): string {
-    const { title, environment } = this.raw;
-    return `${title}${ENVIRONMENT_SUFFIX[environment]}`;
+    return this.withEnvironmentSuffix(this.raw.title);
   }
 
   get port(): number {
@@ -124,6 +134,12 @@ export class AppConfigService {
 
   // ============================== Swagger ==============================
 
+  /**
+   * Swagger 文档配置
+   *
+   * 标题取 `NEST_SWAGGER_TITLE`（而非应用标题），并沿用统一的环境后缀，
+   * 便于同一套代码在不同环境生成可区分的文档。
+   */
   get swaggerOptions(): {
     title: string;
     description: string;
@@ -135,7 +151,7 @@ export class AppConfigService {
     const { swagger, api } = this.raw;
 
     return {
-      title: this.appTitle,
+      title: this.withEnvironmentSuffix(swagger.title),
       description: swagger.description,
       version: `V${api.version}`,
       prefix: swagger.prefix,

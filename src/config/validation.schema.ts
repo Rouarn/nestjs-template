@@ -95,7 +95,8 @@ export const validationSchema = Joi.object({
     .valid('error', 'warn', 'info', 'debug', 'verbose')
     .default('info'),
   NEST_LOGGER_DIR: Joi.string().default('./deploy/logs'),
-  NEST_LOGGER_MAX_FILES: Joi.string().default('14d'),
+  // 保留的日志文件份数（app / error 各自计数）；带 d 后缀的写法表示按天数保留
+  NEST_LOGGER_MAX_FILES: Joi.string().default('14'),
   NEST_LOGGER_MAX_SIZE: Joi.string().default('20m'),
   // 是否记录请求/响应体（默认关闭，避免密码、令牌等敏感信息落盘）
   NEST_LOG_BODY: Joi.boolean().default(false),
