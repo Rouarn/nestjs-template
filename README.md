@@ -278,4 +278,4 @@ deploy/                  # 构建与运行时目录（已 gitignore）
 
 ## 作者
 
-**Rouarn** — <woyuxiaji@foxmail.com> · [GitHub](https://github.com/Rouarn) · [shixian.xyz](http://www.shixian.xyz)
+**VaKao** — <woyuxiaji@foxmail.com> · [GitHub](https://github.com/Rouarn) · [shixian.xyz](http://www.shixian.xyz)
